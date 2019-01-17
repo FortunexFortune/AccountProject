@@ -27,8 +27,8 @@ public class AccountEndpoint {
 	@Path("/createAccount")
 	@POST
 	@Produces({ "application/json" })
-	public String createAccount(String account) {
-		return service.createAccount(account);
+	public String createAccount(String accountJSON) {
+		return service.createAccount(accountJSON);
 	}
 
 	@Path("/deleteAccount/{id}")
@@ -42,8 +42,8 @@ public class AccountEndpoint {
 	@Path("/updateAccount/{id}")
 	@POST
 	@Produces({ "application/json" })
-	public String updateAccount(@PathParam("id") Long id,String account) {
-		return service.updateAccount(id,account);
+	public String updateAccount(@PathParam("id") Long id,String accountJSON) {
+		return service.updateAccount(id,accountJSON);
 	}
 
 	public void setService(AccountService service) {
