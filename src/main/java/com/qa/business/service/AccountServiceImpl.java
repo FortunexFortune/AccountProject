@@ -21,11 +21,12 @@ public class AccountServiceImpl implements AccountService {
 	}
 
 	public String createAccount(String accountJSON) {
-//		Account account = util.getObjectForJSON(accountJSON, Account.class);
-//		if (account.getAccountNumber() == 9999) {
-//			return "{\"message\": \"account is blocked\"}";			
-//		}
+		if ((util.getObjectForJSON(accountJSON, Account.class).getAccountNumber() == 9999)) {
+			return "{\"message\": \"account is blocked\"}";			
+		}
+		else {
 		return repo.createAccount(accountJSON);
+		}
 	}
 	
 	public String updateAccount(Long id, String accountJSON) {
