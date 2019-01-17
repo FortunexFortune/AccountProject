@@ -42,8 +42,8 @@ public class AccountDBRepositoryMap implements AccountRepository {
 	}
 	
 	
-	public String updateAccount(Long id, String firstName, String lastName) {
-		Account accountInDB = accounts.get(id);
+	public String updateAccount(Long accountNumber, String firstName, String lastName) {
+		Account accountInDB = accounts.get(accountNumber);
 		accountInDB.setFirstName(firstName);
 		accountInDB.setLastName(lastName);		
 		// TODO Auto-generated method stub
@@ -51,8 +51,8 @@ public class AccountDBRepositoryMap implements AccountRepository {
 	}
 	
 
-	public String deleteAccount(Long id) {
-		accounts.remove(id);
+	public String deleteAccount(Long accountNumber) {
+		accounts.remove(accountNumber);
 		return "{\"message\": \"account sucessfully deleted\"}";
 	}
 	

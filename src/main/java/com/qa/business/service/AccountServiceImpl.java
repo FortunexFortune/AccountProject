@@ -23,14 +23,14 @@ public class AccountServiceImpl implements AccountService {
 		return repo.createAccount(account);
 	}
 	
-	public String updateAccount(Long id, String firstName, String lastName) {
+	public String updateAccount(Long accountNumber, String firstName, String lastName) {
 		// TODO Auto-generated method stub
-		return repo.updateAccount(id, firstName, lastName);
+		return repo.updateAccount(accountNumber, firstName, lastName);
 	}
 
-	public String deleteAccount(Long id) {
+	public String deleteAccount(Long accountNumber) {
 		// TODO Auto-generated method stub
-		return repo.deleteAccount(id);
+		return repo.deleteAccount(accountNumber);
 	}
 	
 	public void setRepo(AccountRepository repo) {

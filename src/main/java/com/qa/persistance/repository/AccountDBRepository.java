@@ -41,10 +41,15 @@ public class AccountDBRepository implements AccountRepository {
 	@Transactional(REQUIRED)
 	public String updateAccount(Long id, String firstName, String lastName) {
 		Account accountInDB = findAccount(id);
-		accountInDB.setFirstName(firstName);
-		accountInDB.setLastName(lastName);		
+		if (accountInDB != null) {
+			manager.remove(accountInDB);
+			manager.persist(accountInDB);
+			}
+//		accountInDB.setFirstName(firstName);
+//		accountInDB.setLastName(lastName);		
 		return "{\"message\": \"has been sucessfully updated\"}";
 	}
+	
 	
 	@Transactional(REQUIRED)
 	public String deleteAccount(Long id) {
@@ -56,8 +61,8 @@ public class AccountDBRepository implements AccountRepository {
 	}
 
 	
-	private Account findAccount(Long id) {
-		return manager.find(Account.class, id);
+	private Account findAccount(Long accountNumber) {
+		return manager.find(Account.class, accountNumber);
 	}
 	
 	public void setManager(EntityManager manager) {

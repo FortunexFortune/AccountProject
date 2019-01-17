@@ -4,7 +4,7 @@ public interface AccountRepository {
 	
 	String getAllAccounts();
 	String createAccount(String account);
-	String updateAccount(Long id, String firstName, String lastName);
-	String deleteAccount(Long id);
+	String updateAccount(Long accountNumber, String firstName, String lastName);
+	String deleteAccount(Long accountNumber);
 
 }
