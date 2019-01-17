@@ -28,32 +28,38 @@ public class AccountDBRepositoryMap implements AccountRepository {
 	}
 
 	
-	public String createAccount(String account) {
-		Account newAccount = util.getObjectForJSON(account, Account.class);
+	public String createAccount(String accountJSON) {
+		Account newAccount = util.getObjectForJSON(accountJSON, Account.class);
+		accounts.put( newAccount.getId(),newAccount);
+		return "{\"message\": \"account sucessfully created\"}";
 		
-		if(newAccount.getAccountNumber() == 666) {
-			return "{\"message\": \"You can not insert an account with such an ID, You devil\"}";
-		}
-		
-		else {
-			accounts.put( newAccount.getAccountNumber(),newAccount);
-			return "{\"message\": \"account sucessfully created\"}";
-		}
 	}
 	
 	
-	public String updateAccount(Long accountNumber, String firstName, String lastName) {
-		Account accountInDB = accounts.get(accountNumber);
-		accountInDB.setFirstName(firstName);
-		accountInDB.setLastName(lastName);		
+	public String updateAccount(Long id, String accountJSON) {
+		Account accountInDB = accounts.get(id);
+		Account newAccount = util.getObjectForJSON(accountJSON, Account.class);
+
+		if(accountInDB != null) {
+			accountInDB.setFirstName(newAccount.getFirstName());
+			accountInDB.setLastName(newAccount.getLastName());	
+			accountInDB.setAccountNumber(newAccount.getAccountNumber());		
+			return "{\"message\": \"has been sucessfully updated\"}";
+		}
+	
 		// TODO Auto-generated method stub
-		return "{\"message\": \"has been sucessfully updated\"}";
+		return"{\"message\": \"The account number is invalid\"}";
 	}
 	
 
-	public String deleteAccount(Long accountNumber) {
-		accounts.remove(accountNumber);
-		return "{\"message\": \"account sucessfully deleted\"}";
+	public String deleteAccount(Long id) {
+		Account accountInDB = accounts.get(id);
+		if (accountInDB != null) {
+			accounts.remove(id);
+			return "{\"message\": \"account sucessfully deleted\"}";
+			}
+		return "{\"message\": \"deletion did not work\"}";
+	
 	}
 	
 

@@ -1,13 +1,4 @@
 package com.qa.test;
-
-	
-import static org.junit.Assert.assertEquals;
-
-import org.junit.Before;
-import org.junit.Test;
-
-import com.qa.persistance.domain.Account;
-import com.qa.util.JSONUtil;
 public class AccountTest {
 
 //		public ServiceImpl service;

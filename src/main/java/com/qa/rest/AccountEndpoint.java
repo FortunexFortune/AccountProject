@@ -20,6 +20,7 @@ public class AccountEndpoint {
 	@GET
 	@Produces({ "application/json" })
 	public String getAllAccounts() {
+//		http://localhost:8080/AccountProject/api/account/getAllAccounts
 		return service.getAllAccounts();
 	}
 
@@ -33,15 +34,16 @@ public class AccountEndpoint {
 	@Path("/deleteAccount/{id}")
 	@DELETE
 	@Produces({ "application/json" })
-	public String deleteAccount(@PathParam("id") Long accountNumber) {
-		return service.deleteAccount(accountNumber);
+	public String deleteAccount(@PathParam("id") Long id) {
+//		http://localhost:8080/AccountProject/api/account/deleteAccount/1
+		return service.deleteAccount(id);
 	}
 	
 	@Path("/updateAccount/{id}")
-	@PUT
+	@POST
 	@Produces({ "application/json" })
-	public String updateAccount(@PathParam("id") Long id) {
-		return service.deleteAccount(id);
+	public String updateAccount(@PathParam("id") Long id,String account) {
+		return service.updateAccount(id,account);
 	}
 
 	public void setService(AccountService service) {

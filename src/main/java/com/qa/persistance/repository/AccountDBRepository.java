@@ -32,22 +32,22 @@ public class AccountDBRepository implements AccountRepository {
 	}
 	
 	@Transactional(REQUIRED)
-	public String createAccount(String account) {
-		Account newAccount = util.getObjectForJSON(account, Account.class);
+	public String createAccount(String accountJSON) {
+		Account newAccount = util.getObjectForJSON(accountJSON, Account.class);
 		manager.persist(newAccount);
 		return "{\"message\": \"account has been sucessfully added\"}";
 	}
 	
 	@Transactional(REQUIRED)
-	public String updateAccount(Long id, String firstName, String lastName) {
+	public String updateAccount(Long id,String accountJSON) {
 		Account accountInDB = findAccount(id);
+		Account newAccount = util.getObjectForJSON(accountJSON, Account.class);
 		if (accountInDB != null) {
 			manager.remove(accountInDB);
-			manager.persist(accountInDB);
+			manager.persist(newAccount);
+			return "{\"message\": \"has been sucessfully updated\"}";
 			}
-//		accountInDB.setFirstName(firstName);
-//		accountInDB.setLastName(lastName);		
-		return "{\"message\": \"has been sucessfully updated\"}";
+		return"{\"message\": \"The account number is invalid\"}";
 	}
 	
 	
@@ -56,13 +56,14 @@ public class AccountDBRepository implements AccountRepository {
 		Account accountInDB = findAccount(id);
 		if (accountInDB != null) {
 			manager.remove(accountInDB);
+			return "{\"message\": \"account sucessfully deleted\"}";
 			}
-		return "{\"message\": \"account sucessfully deleted\"}";
+		return "{\"message\": \"deletion did not work\"}";
 	}
 
 	
-	private Account findAccount(Long accountNumber) {
-		return manager.find(Account.class, accountNumber);
+	private Account findAccount(Long id) {
+		return manager.find(Account.class, id);
 	}
 	
 	public void setManager(EntityManager manager) {
